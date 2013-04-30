@@ -9,12 +9,13 @@ Author URI: http://eddiemoya.com
 
 define('WPNODE_PATH', 		plugin_dir_path(__FILE__));
 
-include_once (WPNODE_PATH 		. 'wp_node.php');
-//include (WPNODE_PATH 		. 'wp_node_factory.php');
+
+include (WPNODE_PATH 		. 'wp_node_controller.php');
+include (WPNODE_PATH 		. 'wp_node.php');
 
 add_action('init', 'create_nodes', 10);
-function create_nodes(){
 
-	$node = new WP_Node('skcategory');
+function create_nodes(){
+	$node = new WP_Node_Controller('skcategory');
 }
 
