@@ -64,7 +64,8 @@ class WP_Node_Controller {
 			'has_archive' 			=> true, 
 			'hierarchical' 			=> false,
 			'menu_position' 		=> null,
-			'supports' 				=> array( 'title', 'custom-fields' )
+			'supports' 				=> array( 'title', 'custom-fields',  ),
+			'taxonomies'			=> array( $this->taxonomy )
 		)); 
 
 		register_post_type($this->post_type, $args);

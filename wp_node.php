@@ -7,7 +7,9 @@ class WP_Node {
 
 	public function __construct($term_id, $taxonomy = null){
 		$this->term = get_term($term_id, $taxonomy);
+		$this->post = $this->get_post($term_id, $taxonomy);
 	}
+
 
 	/**
 	 * TODO: Allow for some way of mapping logic to metadata or other taxonomies/terms
@@ -22,7 +24,7 @@ class WP_Node {
 
 
 	public function get_meta_data($key){
-		$this->meta = get_post_meta($this->post->ID, $key, true);
+		return get_post_meta($this->post->ID, $key, true);
 	}
 
 	/**
@@ -39,6 +41,25 @@ class WP_Node {
 		));
 
 		return get_post($post_id);
+	}
+
+
+	private function get_post($term_id, $taxonomy = null){
+		$post = get_posts( 
+			array(
+				'post_type' => 'skcategory',
+				'tax_query' => array(
+					array(
+						'terms' => $this->term->slug,
+						'taxonomy' => $taxonomy,
+						'field' => 'slug',
+						'include_children' => false //wtf
+					)
+				)
+
+			)
+		);
+		return $post[0];
 	}
 
 }
