@@ -12,6 +12,7 @@ define('WPNODE_PATH', 		plugin_dir_path(__FILE__));
 
 include (WPNODE_PATH 		. 'wp_node_controller.php');
 include (WPNODE_PATH 		. 'wp_node.php');
+include (WPNODE_PATH 		. 'meta-importer.php');
 
 add_action('init', 'create_nodes', 10);
 

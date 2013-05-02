@@ -5,9 +5,9 @@ class WP_Node {
 	public $post;
 
 
-	public function __construct($term_id, $taxonomy = null){
-		$this->term = get_term($term_id, $taxonomy);
-		$this->post = $this->get_post($term_id, $taxonomy);
+	public function __construct($term, $taxonomy = null, $term_field = 'id'){
+		$this->term = get_term_by($term_field, $term, $taxonomy);
+		$this->post = $this->get_post($term, $taxonomy);
 	}
 
 
@@ -15,11 +15,13 @@ class WP_Node {
 	 * TODO: Allow for some way of mapping logic to metadata or other taxonomies/terms
 	 */
 	public function register_term_meta(){
-		$this->post = $this->insert_post();
+		if(empty($this->post)){
+			$this->post = $this->insert_post();
+		}
 	}
 
 	public function add_meta_data($key, $value){
-		add_post_meta($this->post->ID, $key, $value);
+		add_post_meta($this->post->ID, $key, $value, true);
 	}
 
 
@@ -51,7 +53,7 @@ class WP_Node {
 				'tax_query' => array(
 					array(
 						'terms' => $this->term->slug,
-						'taxonomy' => $taxonomy,
+						'taxonomy' => $this->term->taxonomy,
 						'field' => 'slug',
 						'include_children' => false //wtf
 					)
