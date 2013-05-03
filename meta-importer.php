@@ -123,7 +123,7 @@ class Meta_Importer_CSV{
 	private function curl($url){
 
 		$options = array(
-			CURLOPT_RETURNTRANSFER => 0, // return web page
+			CURLOPT_RETURNTRANSFER => 1, // return web page
 			CURLOPT_URL => $url,
 			CURLOPT_USERAGENT => $_SERVER['HTTP_USER_AGENT'],
 			CURLOPT_CONNECTTIMEOUT => 20,
@@ -139,7 +139,6 @@ class Meta_Importer_CSV{
 		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
 		curl_close($curl);
-
 
 		return $code;
 			
