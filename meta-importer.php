@@ -92,12 +92,12 @@ class Meta_Importer_CSV{
 	 	//print_pre($matches);
 	}
 
-	public function test_cr_links(){
+	public function test_cr_links($offest, $end){
 
 
 		$urls = array();
 
-		foreach($this->terms as $term){
+		foreach(array_slice($this->terms, $offset , $end)as $term){
 			$node = new WP_Node($term->slug, $this->taxonomy, 'slug');
 
 			$wcs_slug = $node->get_meta_data('wcs_slug');
@@ -107,13 +107,11 @@ class Meta_Importer_CSV{
 		
 			 $response = $this->curl($url);
 
-			if( $response != 200 || $response != 301 ){
-				$this->errors[$term->slug] = $response;
+			if( $response == 200 || $response == 301 ){
+				$this->success[$term->slug] = $response;
 			} else {
-				$this->success[$terms->slug] = $response;
+				$this->errors[$terms->slug] = $response;
 			}
-
-
 
 		}
 
