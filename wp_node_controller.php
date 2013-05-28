@@ -34,20 +34,22 @@ class WP_Node_Controller {
 	 */
 	public function register_post_type(){
 
+		$taxonomy  = get_taxonomy($this->taxonomy);
+
 		$labels = apply_filters("wp_node_post_type_{$this->taxonomy}_labels", array(
-			'name' 					=> _x(ucfirst($taxonomy->name) .'s', 'post type general name'),
-			'singular_name' 		=> _x(ucfirst($taxonomy->singular_name), 'post type singular name'),
-			'add_new' 				=> _x('Add New', ucfirst($taxonomy->add_new_item)),
-			'add_new_item' 			=> __('Add New ' . ucfirst($taxonomy->add_new_item)),
-			'edit_item' 			=> __('Edit ' . ucfirst($taxonomy->edit_item)),
-			'new_item' 				=> __('New ' . ucfirst($taxonomy->new_item_name)),
-			'all_items' 			=> __('All ' . ucfirst($taxonomy->name) . 's'),
-			'view_item' 			=> __('View ' . ucfirst($taxonomy->view_item) . 's'),
-			'search_items' 			=> __('Search ' .ucfirst($taxonomy->search_items) .'s'),
+			'name' 					=> _x(ucfirst($taxonomy->labels->name) .'s', 'post type general name'),
+			'singular_name' 		=> _x(ucfirst($taxonomy->labels->singular_name), 'post type singular name'),
+			'add_new' 				=> _x('Add New', ucfirst($taxonomy->labels->add_new_item)),
+			'add_new_item' 			=> __('Add New ' . ucfirst($taxonomy->labels->add_new_item)),
+			'edit_item' 			=> __('Edit ' . ucfirst($taxonomy->labels->edit_item)),
+			'new_item' 				=> __('New ' . ucfirst($taxonomy->labels->new_item_name)),
+			'all_items' 			=> __(ucfirst($taxonomy->labels->all_items)),
+			'view_item' 			=> __('View ' . ucfirst($taxonomy->labels->view_item) . 's'),
+			'search_items' 			=> __(ucfirst($taxonomy->labels->search_items)),
 			'not_found' 			=> __("No {$this->post_type}s found"),
 			'not_found_in_trash' 	=> __("No {$this->post_type}s found in Trash"), 
 			'parent_item_colon' 	=> '',
-			'menu_name' 			=> __(ucfirst($taxonomy->menu_name))
+			'menu_name' 			=> __(ucfirst($taxonomy->labels->menu_name))
 		));
 
 
