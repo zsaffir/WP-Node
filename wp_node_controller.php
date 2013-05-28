@@ -9,7 +9,7 @@ class WP_Node_Controller {
 	 */
 	public function __construct($taxonomy, $post_type = null){
 		$this->taxonomy = $taxonomy;
-		$this->post_type = (!empty($post_type)) ? $post_type : $this->taxonomy;
+		$this->post_type = (is_null($post_type)) ? $taxonomy : $post_type;
 		$this->actions();
 	}
 
@@ -23,7 +23,7 @@ class WP_Node_Controller {
 	}
 	
 	public function create_node($term_id, $tt_id = null){
-		$node = new WP_Node($term_id, $this->taxonomy);
+		$node = new WP_Node($term_id, $this->taxonomy, 'id', $this->post_type);
 		$node->register_term_meta();
 		
 	}
@@ -69,6 +69,14 @@ class WP_Node_Controller {
 		)); 
 
 		register_post_type($this->post_type, $args);
+	}
+
+	public function add_post_type_support($support){
+		add_post_type_support($this->post_type, $support);
+	}
+
+	public function remove_post_type_support($support){
+		remove_post_type_support($this->post_type, $support);
 	}
 }
 

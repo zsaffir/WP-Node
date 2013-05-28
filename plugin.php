@@ -18,5 +18,7 @@ add_action('init', 'create_nodes', 10);
 
 function create_nodes(){
 	$node = new WP_Node_Controller('skcategory');
+	//$section_fronts = new WP_Node_Controller('category', 'section');
+
 }
 
