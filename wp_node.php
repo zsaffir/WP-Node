@@ -39,7 +39,7 @@ class WP_Node {
 			'post_status' 	=> 'publish',
 			'post_type' 	=> $this->post_type,
 			'post_name'		=> $this->term->slug,
-			'post_title' 	=> ucfirst($this->term->taxonomy).': '.$this->term->name,
+			'post_title' 	=> $this->term->name,
 			'tax_input'		=> array( $this->term->taxonomy => array($this->term->term_id))
 		));
 

@@ -17,7 +17,6 @@ class WP_Node_Controller {
 	 * @author Eddie Moya
 	 */
 	public function actions(){
-
 		add_action("created_$this->taxonomy", array($this, 'create_node'));
 		add_action('init', array($this, 'register_post_type'), 11);
 	}
@@ -39,14 +38,14 @@ class WP_Node_Controller {
 		$labels = apply_filters("wp_node_post_type_{$this->taxonomy}_labels", array(
 			'name' 					=> _x(ucfirst($taxonomy->labels->name) .'s', 'post type general name'),
 			'singular_name' 		=> _x(ucfirst($taxonomy->labels->singular_name), 'post type singular name'),
-			'add_new' 				=> _x('Add New', ucfirst($taxonomy->labels->add_new_item)),
-			'add_new_item' 			=> __('Add New ' . ucfirst($taxonomy->labels->add_new_item)),
-			'edit_item' 			=> __('Edit ' . ucfirst($taxonomy->labels->edit_item)),
-			'new_item' 				=> __('New ' . ucfirst($taxonomy->labels->new_item_name)),
+			'add_new' 				=> __(ucfirst($taxonomy->labels->add_new_item)),
+			'add_new_item' 			=> __(ucfirst($taxonomy->labels->add_new_item)),
+			'edit_item' 			=> __(ucfirst($taxonomy->labels->edit_item)),
+			'new_item' 				=> __(ucfirst($taxonomy->labels->new_item_name)),
 			'all_items' 			=> __(ucfirst($taxonomy->labels->all_items)),
-			'view_item' 			=> __('View ' . ucfirst($taxonomy->labels->view_item) . 's'),
+			'view_item' 			=> __(ucfirst($taxonomy->labels->view_item)),
 			'search_items' 			=> __(ucfirst($taxonomy->labels->search_items)),
-			'not_found' 			=> __("No {$this->post_type}s found"),
+			'not_found' 			=> __(ucfirst($taxonomy->labels->not_found)),
 			'not_found_in_trash' 	=> __("No {$this->post_type}s found in Trash"), 
 			'parent_item_colon' 	=> '',
 			'menu_name' 			=> __(ucfirst($taxonomy->labels->menu_name))
