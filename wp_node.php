@@ -31,7 +31,6 @@ class WP_Node {
 	}
 
 	/**
-	 * 
 	 */
 	private function insert_post($post_type = null){
 
